@@ -80,6 +80,10 @@ async function getComments(story, id) {
       break
     }
   }
+
+  if (CommentSchema.safeParse(storiesObj.comments[id]) && StorySchema.safeParse(story)) {
+    console.log(id, "Story and comments are valid - push to db")
+  }
 }
 
 async function main() {
