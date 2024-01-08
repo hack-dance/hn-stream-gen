@@ -45,10 +45,10 @@ async function complete(prompt, schema) {
     messages: [
       {
         role: "system",
-        content: "You are a helpful assistant that writes creative HN (Hacker News) story titles"
+        content: prompt
       }
     ],
-    model: "gpt-4",
+    model: "gpt-4-1106-preview",
     response_model: {
       schema: schema,
       name: "value extraction"
@@ -74,12 +74,7 @@ async function getComments(story, id) {
 
   for await (const result of commentsStream) {
     try {
-      console.log(result.comments)
       storiesObj.comments[id] = result.comments
-
-      console.clear()
-      console.table(storiesObj.stories)
-      console.table(storiesObj.comments)
     } catch (e) {
       console.log(e)
       break
